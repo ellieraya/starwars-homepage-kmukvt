@@ -36,7 +36,7 @@
                   <span> of {{starwar.name}}</span>
                 </mat-panel-description>
               </mat-expansion-panel-header>
-              <div class="body__filmDetails" *ngFor="let filmDetails of filmDetailsList;">
+              <div class="body__filmDetails" *ngFor="let filmDetails of filmDetailsList | filterUnique;">
                 <p>{{filmDetails.name}} : {{filmDetails.date | date:'medium' }}</p>
                 </div>
             </mat-expansion-panel>
