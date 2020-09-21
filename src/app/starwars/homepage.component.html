@@ -1,0 +1,51 @@
+<div class="container">
+	<div class="wrapper">
+		<div class="header">
+      <h1 class="header__title"> Star Wars Blog</h1>
+		</div>
+		<div class="body">
+			<ng-container *ngFor="let starwar of starwars; let sectionId = index">
+        <mat-card>
+        <div class="body__card" [ngClass]="sectionId === activeSectionId ? 'body__card--active' :'body__card'"
+        (click)="selectCharacter(starwar.url, sectionId)">
+          <h1 class="body__card--title"  >{{starwar.name}}</h1>
+          <ng-container *ngIf="sectionId === activeSectionId && filmCharactersDetails">
+            <mat-expansion-panel>
+              <mat-expansion-panel-header>
+                <mat-panel-title>
+                  Characters
+                </mat-panel-title>
+                <mat-panel-description>
+                  In film characters
+                </mat-panel-description>
+              </mat-expansion-panel-header>
+              <div class="body__filmDetails" *ngFor="let characterDetails of filmCharactersDetails | filterUnique;">
+                <p class="body__filmDetails--name">{{characterDetails}}</p>
+              </div>
+            </mat-expansion-panel>
+          </ng-container>
+        </div>
+        <ng-container *ngIf="sectionId === activeSectionId && filmCharactersDetails && (filmDetailsList | keyvalue)?.length>0">
+          <div class="body__card" [ngClass]="sectionId === activeSectionId ? 'body__card--active' :'body__card'">
+            <mat-expansion-panel>
+              <mat-expansion-panel-header>
+                <mat-panel-title>
+                  Films
+                </mat-panel-title>
+                <mat-panel-description>
+                  <span> of {{starwar.name}}</span>
+                </mat-panel-description>
+              </mat-expansion-panel-header>
+              <div class="body__filmDetails" *ngFor="let filmDetails of filmDetailsList;">
+                <p>{{filmDetails.name}} : {{filmDetails.date | date:'medium' }}</p>
+                </div>
+            </mat-expansion-panel>
+          </div>
+        </ng-container>
+        </mat-card>
+			
+      
+			</ng-container>
+		</div>
+	</div>
+</div>
